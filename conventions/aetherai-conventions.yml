@@ -1,0 +1,117 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  https://www.aetherai.com/_api/mcp (live probe), https://www.aetherai.com/llms.txt
+summary: >-
+  Runtime semantics for the only public aetherAI surface: a JSON-RPC 2.0 Model Context Protocol
+  endpoint. Almost every convention below is ABSENT, and that absence is the finding. There is no
+  REST surface, so there is no pagination scheme, no expansion syntax, no idempotency key, no
+  request-id header, no versioning policy and no rate-limit signal to document. Nothing here is
+  derived from an OpenAPI, because aetherAI publishes none.
+
+scope_of_this_profile: >-
+  The Wix-hosted website MCP endpoint. aetherSlide, aetherWeb, aetherAI Hema, aetherAI Endo and
+  aetherAI Ortho expose no public API and are not described here.
+
+protocol:
+  style: json-rpc-2.0
+  transport: streamable-http
+  endpoint: https://www.aetherai.com/_api/mcp
+  content_types:
+    - application/json
+    - text/event-stream
+  verified: probed
+
+auth_style:
+  summary: Anonymous; in-band visitor token for the two write-capable tools.
+  see: authentication/aetherai-authentication.yml
+
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  retention: null
+  note: >-
+    No replay protection exists. The MCP surface has two mutating tools (CallWixSiteAPI and
+    ExecuteWixAPI, the latter carrying an explicit hasMutations flag) and neither accepts an
+    idempotency key, a client-supplied request id for de-duplication, or any other
+    exactly-once affordance. An agent that retries a failed call has no way to know whether the
+    first attempt landed.
+  verified: probed
+
+reversibility:
+  grade: none
+  applicable: true
+  note: >-
+    NOT `na` — there is a write surface. The two mutating tools can start a purchase or modify
+    site data on a visitor's behalf, and NO reversal operation, cancel path, undo, or reversal
+    WINDOW is documented anywhere: not in llms.txt, not in the tool descriptions returned by
+    tools/list, and not on aetherAI's site. No window is asserted here, because none is published.
+  write_surfaces:
+    - operation: CallWixSiteAPI
+      mutating: true
+      reversal_operation: null
+      reversal_window: null
+      docs: null
+    - operation: ExecuteWixAPI
+      mutating: true
+      reversal_operation: null
+      reversal_window: null
+      docs: null
+      note: >-
+        Carries a hasMutations boolean, which is a declaration of intent rather than a reversal
+        affordance — it tells the server the call will mutate, not how to take it back.
+
+dry_run_mode:
+  supported: false
+  note: >-
+    No dry-run, preview, validate-only, or simulation mode is offered on either mutating tool.
+
+pagination:
+  style: none
+  note: >-
+    No pagination scheme is documented. SearchInSite and SearchSiteApiDocs take only a searchTerm
+    and return an unpaged result block.
+
+field_expansion:
+  supported: false
+metadata_fields:
+  supported: false
+
+request_tracing:
+  request_id: json-rpc `id`
+  header: null
+  note: >-
+    Correlation is the JSON-RPC envelope id echoed in the response. There is no X-Request-Id
+    response header and no trace id an agent could quote to support.
+
+versioning:
+  scheme: mcp-protocol-version
+  current: '2025-06-18'
+  source: initialize response, probed 2026-09-12
+  policy_published: false
+  note: >-
+    The only version aetherAI's public surface carries is the MCP protocol version Wix negotiates.
+    aetherAI publishes no API versioning policy, no deprecation policy, and no Sunset/Deprecation
+    header contract, so no lifecycle/ artifact was written.
+
+error_envelope:
+  shape: json-rpc-2.0-error
+  problem_json: false
+  catalog_published: false
+  note: >-
+    Errors arrive as the JSON-RPC 2.0 error object. No error-code registry is published, so no
+    errors/ artifact was written — deriving one would mean inventing codes.
+
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: null
+  see: rate-limits/aetherai-rate-limits.yml
+  note: No rate-limit headers were returned on an anonymous probe.
+
+cross_links:
+  authentication: authentication/aetherai-authentication.yml
+  rate_limits: rate-limits/aetherai-rate-limits.yml
+  conformance: conformance/aetherai-conformance.yml
+  mcp: mcp/aetherai-mcp.yml

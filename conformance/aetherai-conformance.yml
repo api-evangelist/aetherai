@@ -1,0 +1,145 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  https://www.aetherai.com/_api/mcp (live probe), https://www.aetherai.com/llms.txt,
+  https://www.aetherai.com/about, https://api.fda.gov/device/510k.json?search=k_number:K233126
+summary: >-
+  Two kinds of conformance are recorded here and they should not be confused. TECHNICAL
+  conformance is thin: the only standard aetherAI's public surface actually speaks is the Model
+  Context Protocol, and it speaks it because Wix hosts the website. REGULATORY conformance is
+  substantial and independently verifiable: aetherSlide is FDA-cleared, CE-marked and
+  TFDA-approved, and the company holds ISO/IEC 27001. No DOMAIN standard for digital pathology
+  (DICOM / DICOMweb / HL7 v2 / HL7 FHIR / IHE PaLM) is declared anywhere in aetherAI's public
+  material, so none is asserted — a reward-only slot is left empty rather than invented.
+
+conformance:
+  - id: mcp
+    label: Model Context Protocol
+    conforms: true
+    version: '2025-06-18'
+    evidence: https://www.aetherai.com/_api/mcp
+    method: probed
+    note: >-
+      initialize returned protocolVersion "2025-06-18" and a tools capability with
+      listChanged:true; tools/list returned 9 tools with JSON Schema inputSchema. HTTP 200,
+      anonymous. Transport is streamable HTTP. Platform-authored by Wix, served on aetherAI's host.
+  - id: llmstxt
+    label: llms.txt
+    conforms: true
+    evidence: https://www.aetherai.com/llms.txt
+    method: probed
+    note: >-
+      HTTP 200, text/plain, well-formed llms.txt (H1 title, blockquote summary, H2 link sections).
+      Wix-generated for the site.
+  - id: oauth2
+    label: OAuth 2.0
+    conforms: false
+    evidence: https://www.aetherai.com/.well-known/oauth-authorization-server
+    method: probed
+    note: HTTP 400 (HTML catch-all). No authorization-server metadata is served.
+  - id: oidc
+    label: OpenID Connect
+    conforms: false
+    evidence: https://www.aetherai.com/.well-known/openid-configuration
+    method: probed
+    note: HTTP 400 (HTML catch-all). No OIDC discovery document.
+  - id: rfc9728
+    label: OAuth 2.0 Protected Resource Metadata
+    conforms: false
+    evidence: https://www.aetherai.com/.well-known/oauth-protected-resource/_api/mcp
+    method: probed
+    note: HTTP 400. The MCP endpoint is anonymous, so no protected-resource metadata is required.
+  - id: rfc9116
+    label: security.txt
+    conforms: false
+    evidence: https://www.aetherai.com/.well-known/security.txt
+    method: probed
+    note: HTTP 400 on both www and apex; HTTP 404 on demo.aetherai.com.
+  - id: openapi
+    label: OpenAPI
+    conforms: false
+    evidence: https://www.aetherai.com/openapi.json
+    method: probed
+    note: >-
+      HTTP 400 HTML shell on the marketing host; HTTP 404 on demo.aetherai.com. No OpenAPI is
+      published anywhere for any aetherAI product.
+  - id: rfc9457
+    label: Problem Details for HTTP APIs
+    conforms: false
+    evidence: https://www.aetherai.com/_api/mcp
+    method: probed
+    note: >-
+      Not applicable in practice — the MCP surface is JSON-RPC 2.0, which carries its own error
+      object rather than application/problem+json. No REST surface exists to apply RFC 9457 to.
+
+domain_standards:
+  declared: []
+  probed_for:
+    - id: dicom
+      label: DICOM / DICOMweb (WADO-RS, QIDO-RS, STOW-RS)
+      declared: false
+      note: >-
+        Not named on the products page, the services page, the about page, or in any public
+        aetherAI material found. aetherSlide is described as "vendor-neutral" for slide formats,
+        but no DICOM or DICOMweb conformance statement is published. Recorded as absent, not as
+        non-conformant — a conformance statement may exist behind the sales process.
+    - id: hl7-fhir
+      label: HL7 FHIR
+      declared: false
+      note: Not named in any public aetherAI material.
+    - id: hl7v2
+      label: HL7 v2 messaging
+      declared: false
+      note: Not named in any public aetherAI material.
+    - id: ihe-palm
+      label: IHE Pathology and Laboratory Medicine profiles
+      declared: false
+      note: Not named in any public aetherAI material.
+  note: >-
+    REWARD-ONLY SLOT, LEFT EMPTY DELIBERATELY. Digital pathology does have real domain standards
+    and a vendor that spoke them in a published contract would earn credit here. aetherAI publishes
+    no contract at all, so there is nothing in which a standard could be declared. This is an
+    absence of evidence, recorded as such.
+
+certifications:
+  - id: iso-27001
+    label: ISO/IEC 27001 Information Security Management
+    status: achieved
+    year: 2024
+    evidence: https://www.aetherai.com/about
+    method: searched
+    note: >-
+      Listed verbatim among the company's own 2024 milestones on its About page: "Achieved
+      ISO/IEC 27001 certification." First-party claim; no certificate number is published.
+  - id: fda-510k
+    label: US FDA 510(k) clearance — aetherSlide
+    status: cleared
+    identifier: K233126
+    decision_date: '2024-05-30'
+    product_code: QKQ
+    applicant: Aetherai Co., Ltd.
+    evidence: https://api.fda.gov/device/510k.json?search=k_number:K233126
+    method: probed
+    note: >-
+      INDEPENDENTLY VERIFIED against openFDA, not taken from the vendor's marketing copy. The
+      openFDA 510(k) record returns applicant "Aetherai Co., Ltd.", device name "aetherSlide",
+      decision "Substantially Equivalent" dated 2024-05-30.
+  - id: ce-mark
+    label: CE marking — aetherSlide, aetherAI Hema
+    status: marked
+    evidence: https://www.aetherai.com/products
+    method: searched
+    note: First-party claim on the products page. No notified-body number is published.
+  - id: tfda
+    label: Taiwan FDA approval — aetherSlide (License No. 006777), aetherAI Hema, aetherAI Endo
+    status: approved
+    identifier: '006777'
+    evidence: https://www.aetherai.com/products
+    method: searched
+    note: First-party claim on the products page.
+
+regulatory_regime: healthcare
+regulatory_note: >-
+  aetherAI is a regulated medical-device software maker (SaMD) in the US, EU and Taiwan. Its
+  regulatory posture is strong and independently checkable; its API posture is absent. These are
+  different facts about the same company and the score should reflect both honestly.

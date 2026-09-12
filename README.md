@@ -1,4 +1,4 @@
-# Aetherai
+# aetherAI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,5 +64,18 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aetherai is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
+aetherAI (雲象科技, aetherAI Co., Ltd.) is a Taipei-based medical-imaging AI company focused on
+digital pathology. It builds regulated diagnostic software — aetherSlide (FDA-cleared K233126,
+CE-marked, TFDA-approved), aetherWeb, aetherAI Hema, aetherAI Endo and aetherAI Ortho — sold to
+hospitals, reference laboratories and pharmaceutical R&D teams.
+
+**API posture:** aetherAI publishes no public developer API, no OpenAPI or other machine-readable
+contract, and no developer portal. Its clinical application sits behind a customer login at
+`demo.aetherai.com`. The one publicly callable surface is a Wix-provided Site MCP endpoint at
+`https://www.aetherai.com/_api/mcp`, which is anonymous and live but serves website content rather
+than any clinical product. See `x-coverage` in `apis.yml` for the specific wall that was hit.
+
+Surfaced via the API Evangelist harvest backlog (source: secondary-market).
+- https://www.aetherai.com/
+- https://github.com/aetherAI
 - https://equityzen.com/company/aetherai

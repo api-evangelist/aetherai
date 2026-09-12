@@ -1,0 +1,143 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  registry.npmjs.org, pypi.org/pypi/*/json, api.github.com/orgs/aetherAI — probed 2026-09-12
+summary: >-
+  aetherAI publishes NO client libraries. There is no first-party SDK on npm, PyPI, Maven Central,
+  NuGet, pkg.go.dev, RubyGems, Packagist or crates.io, because there is no public API for one to
+  wrap. What the company does publish openly is research code: seven first-party repositories in
+  the github.com/aetherAI organization that reproduce its published pathology-AI papers. Those are
+  scientific artifacts, not integration clients, so they are recorded here as source_repositories
+  and NO `SDKs` pointer is emitted in apis.yml.
+
+package_count: 0
+official_sdk_count: 0
+
+packages: []
+
+source_repositories:
+  - name: whole-slide-cnn
+    official: true
+    kind: research-code
+    registry: null
+    version: null
+    published: null
+    repo: https://github.com/aetherAI/whole-slide-cnn
+    language: Python
+    stars: 62
+    description: >-
+      Reproduces "An annotation-free whole-slide training approach to pathological classification
+      of lung cancer types by deep learning".
+    note: >-
+      Not distributed through any package registry — pypi.org/pypi/whole-slide-cnn/json returned
+      404 on 2026-09-12. version is null because there is nothing published to read a version from.
+  - name: hms2
+    official: true
+    kind: research-code
+    registry: null
+    version: null
+    published: null
+    repo: https://github.com/aetherAI/hms2
+    language: Python
+    stars: 28
+    description: >-
+      Annotation-free whole-slide training for pathological classification; reproduces "Deep neural
+      network trained on gigapixel images improves lymph node metastasis detection in clinical
+      settings".
+    note: No registry distribution; version is null because none is published.
+  - name: tensorflow-huge-model-support
+    official: true
+    kind: research-code
+    registry: null
+    version: null
+    published: null
+    repo: https://github.com/aetherAI/tensorflow-huge-model-support
+    language: Python
+    stars: 29
+    description: Library to speed up huge-model training on unified memory.
+    note: >-
+      Not on PyPI — pypi.org/pypi/tensorflow-huge-model-support/json returned 404 on 2026-09-12.
+  - name: stain-mixup
+    official: true
+    kind: research-code
+    registry: null
+    version: null
+    published: null
+    repo: https://github.com/aetherAI/stain-mixup
+    language: Python
+    stars: 12
+    description: >-
+      Augmentation function from "Stain mix-up: Unsupervised domain generalization for
+      histopathology images".
+    note: Not on PyPI — pypi.org/pypi/stain-mixup/json returned 404 on 2026-09-12.
+  - name: hp-gastritis-hms2-auxiliary
+    official: true
+    kind: research-code
+    registry: null
+    version: null
+    published: null
+    repo: https://github.com/aetherAI/hp-gastritis-hms2-auxiliary
+    language: Python
+    stars: 1
+    description: >-
+      Reproduces "A two-tiered deep learning-based model for histologic diagnosis of Helicobacter
+      gastritis".
+    note: No registry distribution.
+  - name: hema_cell_dc
+    official: true
+    kind: research-code
+    registry: null
+    version: null
+    published: null
+    repo: https://github.com/aetherAI/hema_cell_dc
+    language: Python
+    stars: 0
+    description: Bone-marrow cell differential-count research code (no description published).
+    note: No registry distribution.
+  - name: Pypi-Project-Template
+    official: true
+    kind: template
+    registry: null
+    version: null
+    published: null
+    repo: https://github.com/aetherAI/Pypi-Project-Template
+    language: Python
+    stars: 2
+    description: Internal PyPI packaging template.
+    note: >-
+      A packaging template, not a package. Despite its name, no aetherAI-authored distribution
+      appears on PyPI — pypi.org/pypi/aetherai/json returned 404 on 2026-09-12.
+
+forks:
+  - name: openslide
+    official: false
+    kind: fork
+    upstream: https://github.com/openslide/openslide
+    repo: https://github.com/aetherAI/openslide
+    note: >-
+      A fork of the upstream OpenSlide C library for reading virtual slide images. Third-party
+      code, so official is false.
+  - name: claude-code-slack-channel
+    official: false
+    kind: fork
+    repo: https://github.com/aetherAI/claude-code-slack-channel
+    note: A fork of an unrelated developer-tooling project. Not an aetherAI product.
+
+rejected_candidates:
+  - name: aetherai
+    registry: npm
+    url: https://registry.npmjs.org/aetherai
+    version: 0.8.2
+    published: '2026-09-05'
+    rejected_because: >-
+      NAME COLLISION, not this company. The package repository is
+      github.com/TQSY114514/Aether and it describes "Aether headless agent — CLI, TUI, and
+      Electron-free SDK". Nothing connects it to aetherAI Co., Ltd. of Taipei.
+  - name: aether-ai
+    registry: pypi
+    url: https://pypi.org/pypi/aether-ai/json
+    version: 0.6.0
+    published: null
+    rejected_because: >-
+      NAME COLLISION, not this company. Summary is "Python SDK for Aether decentralized RAG";
+      homepage is github.com/quintessence-group/aether-sdk-python.

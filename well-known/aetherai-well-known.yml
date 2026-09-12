@@ -1,0 +1,79 @@
+generated: '2026-09-12'
+method: probed
+source: direct HTTP probe of every host this record knows
+summary: >-
+  Nothing. Every canonical /.well-known/ path was probed on all three hosts aetherAI operates and
+  not one returned a document. The Wix-hosted marketing site answers HTTP 400 with an HTML shell
+  for any unknown /.well-known/ path (a catch-all, not a document), and the customer application
+  host answers a plain 404. No WellKnown or SecurityTxt pointer is emitted in apis.yml, because
+  this file records an ABSENCE and a pointer would assert a presence.
+
+hosts:
+  - host: www.aetherai.com
+    role: primary marketing site (Wix-hosted) and MCP host
+    documents:
+      - path: /.well-known/security.txt
+        status: 400
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 400
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 400
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 400
+        file: null
+      - path: /.well-known/api-catalog
+        status: 400
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 400
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 400
+        file: null
+      - path: /.well-known/agent.json
+        status: 400
+        file: null
+  - host: aetherai.com
+    role: apex, redirects to www
+    documents:
+      - path: /.well-known/security.txt
+        status: 400
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 400
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 400
+        file: null
+      - path: /.well-known/api-catalog
+        status: 400
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 400
+        file: null
+  - host: demo.aetherai.com
+    role: aetherAI DPAI demo application (login-gated single-page app)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+
+notes:
+  - >-
+    The 400 responses on the Wix hosts carry an HTML body ("<!DOCTYPE html>"), not a document.
+    Per the pipeline rule, an HTML/SPA shell is a miss regardless of status code.
+  - >-
+    An llms.txt IS served, at https://www.aetherai.com/llms.txt (HTTP 200, text/plain) — but it
+    is at the site root, not under /.well-known/, so it is recorded in llms/ rather than here.
+  - >-
+    No A2A agent card was found on any host, so no a2a/ artifact was written and no AgentCard
+    pointer was emitted.

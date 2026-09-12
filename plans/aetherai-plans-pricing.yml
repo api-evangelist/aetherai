@@ -1,0 +1,26 @@
+generated: '2026-09-12'
+method: searched
+source: https://www.aetherai.com/products
+summary: >-
+  aetherAI publishes no pricing of any kind. It sells FDA-cleared / CE-marked / TFDA-approved
+  medical devices and software to hospitals, laboratories and pharmaceutical companies through a
+  direct sales and distribution motion, and every product page ends at a contact form rather than
+  a plan table. There is no self-serve tier, no trial price, and no published list price.
+plan_count: 0
+currency: null
+billing_model: enterprise-contact-sales
+plans: []
+evidence:
+  - url: https://www.aetherai.com/products
+    status: 200
+    note: Four products listed (aetherSlide, aetherWeb, aetherAI Hema, aetherAI Endo); no prices.
+  - url: https://www.aetherai.com/pricing
+    status: 404
+  - url: https://www.aetherai.com/plans
+    status: 404
+  - url: https://www.aetherai.com/our-service
+    status: 200
+    note: Services and pharma offerings described; no prices.
+  - url: https://www.aetherai.com/contact
+    status: 200
+    note: The contact form is the published route to a quote.

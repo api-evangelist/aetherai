@@ -1,0 +1,27 @@
+generated: '2026-09-12'
+method: probed
+source: https://www.aetherai.com/_api/mcp
+summary: >-
+  No published rate limits. aetherAI has no developer documentation to publish them in. The one
+  callable public surface — the Wix Site MCP endpoint — returned no rate-limit headers of any kind
+  on an anonymous initialize/tools-list exchange, and Wix does not document limits for it on
+  aetherAI's behalf. Recorded as an honest zero rather than omitted.
+limit_count: 0
+limits: []
+response_headers_observed: []
+status_code_on_exhaustion: null
+evidence:
+  - url: https://www.aetherai.com/_api/mcp
+    status: 200
+    note: >-
+      POST tools/list, anonymous. Response carried no X-RateLimit-*, no RateLimit-*, and no
+      Retry-After header.
+  - url: https://www.aetherai.com/llms.txt
+    status: 200
+    note: >-
+      The only machine-readable description of the MCP surface. It states "No authentication
+      required to connect to the MCP endpoint" and says nothing about limits.
+notes:
+  - >-
+    The clinical products (aetherSlide, aetherWeb, Hema, Endo, Ortho) expose no public API, so
+    there is no product API surface for limits to apply to.

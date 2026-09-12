@@ -1,0 +1,139 @@
+generated: '2026-09-12'
+method: probed
+source: https://www.aetherai.com/_api/mcp
+name: aetherAI Site MCP Server
+summary: >-
+  A live, anonymous Model Context Protocol server served from aetherAI's own host at
+  https://www.aetherai.com/_api/mcp. It is the ONLY machine-readable API surface aetherAI
+  exposes to the public. It is the Wix "Site MCP" — platform-authored by the website host,
+  not written by aetherAI — and it exposes the CONTENT AND COMMERCE SURFACE OF THE WEBSITE
+  (business details, site search, Wix business-solution APIs), NOT the company's clinical
+  products. aetherSlide, aetherWeb, aetherAI Hema, aetherAI Endo and aetherAI Ortho publish
+  no public API, no OpenAPI, and no developer documentation (see x-coverage in apis.yml).
+
+deployment:
+  mode: remote
+  endpoint: https://www.aetherai.com/_api/mcp
+  install: null
+  package: null
+  auth: none
+  verified: probed
+
+x-evidence:
+  fetched: '2026-09-12'
+  initialize:
+    url: https://www.aetherai.com/_api/mcp
+    method: POST
+    http_status: 200
+    protocol_version: '2025-06-18'
+    server_name: 'Site Visitor Assistant for site "aetherAI" (https://www.aetherai.com/_api/mcp)'
+    server_version: 1.0.0
+    capabilities:
+      tools:
+        listChanged: true
+      logging: {}
+  tools_list:
+    url: https://www.aetherai.com/_api/mcp
+    method: POST
+    http_status: 200
+    tool_count: 9
+    file: mcp/aetherai-mcp-tools-list.json
+  advertised_by:
+    url: https://www.aetherai.com/llms.txt
+    http_status: 200
+    file: llms/aetherai-llms.txt
+
+x-authorship:
+  authored_by: platform
+  platform: Wix
+  note: >-
+    Wix generates this endpoint and its tool set for sites it hosts; the tool names,
+    descriptions and input schemas are identical across Wix sites. aetherAI's contribution is
+    the site content the tools read, and the decision to leave the surface enabled. Recorded
+    as present because it is genuinely reachable on the company's own host with no
+    credentials — not as evidence that aetherAI authored an agent interface.
+  platform_docs: https://dev.wix.com/docs/develop-websites/articles/get-started/about-the-wix-site-mcp
+
+transport: streamable-http
+protocol_version: '2025-06-18'
+
+tools:
+  - name: GetBusinessDetails
+    category: site-metadata
+    description: Retrieves business and site details such as timezone, email, phone, and address.
+    input_schema_properties: []
+    verified: probed
+  - name: SearchInSite
+    category: site-search
+    description: Searches the site for information.
+    input_schema_properties: [searchTerm]
+    verified: probed
+  - name: SearchSiteApiDocs
+    category: docs
+    description: >-
+      Retrieves the API documentation for the Wix business solutions installed on this site and
+      tells the client how to use them. On aetherAI the only installed business solution is the
+      Wix Blog app.
+    input_schema_properties: [searchTerm]
+    verified: probed
+  - name: GenerateVisitorToken
+    category: auth
+    description: >-
+      Creates a visitor session and returns an anonymous visitor access token. Must be called
+      before CallWixSiteAPI.
+    input_schema_properties: []
+    verified: probed
+  - name: CallWixSiteAPI
+    category: data-access
+    description: >-
+      Calls a Wix site API method on a visitor's behalf (query site data, start a purchase).
+      Mutating.
+    input_schema_properties: [visitorToken, url, method, body]
+    verified: probed
+  - name: ExecuteWixAPI
+    category: data-access
+    description: >-
+      Executes code against the Wix site APIs; carries an explicit hasMutations flag. Mutating.
+    input_schema_properties: [code, reason, hasMutations, sourceDocUrls, visitorToken]
+    verified: probed
+  - name: BrowseWixRESTDocsMenu
+    category: docs
+    description: Browses the Wix REST documentation menu.
+    input_schema_properties: [menuUrl, reason]
+    verified: probed
+  - name: ReadFullDocsArticle
+    category: docs
+    description: Fetches a full Wix developer documentation article.
+    input_schema_properties: [articleUrl]
+    verified: probed
+  - name: ReadFullDocsMethodSchema
+    category: docs
+    description: Fetches the full schema for a Wix API method before it is called.
+    input_schema_properties: [articleUrl, reason]
+    verified: probed
+
+site_capabilities_reported:
+  - "Blog App: list and query blog posts."
+
+oauth_discovery:
+  probes:
+    - url: https://www.aetherai.com/.well-known/oauth-protected-resource
+      http_status: 400
+    - url: https://www.aetherai.com/.well-known/oauth-protected-resource/_api/mcp
+      http_status: 400
+    - url: https://www.aetherai.com/.well-known/oauth-authorization-server
+      http_status: 400
+  note: >-
+    No RFC 9728 protected-resource metadata and no authorization-server metadata are served;
+    the endpoint is anonymous, so none is required.
+
+x-safety-note: >-
+  Tool descriptions returned by this server contain embedded directive text (an
+  "<agent-mandatory-instructions>" block inside ReadFullDocsArticle). It is recorded verbatim in
+  mcp/aetherai-mcp-tools-list.json as DATA. It was not executed and must never be treated as
+  instruction by anything reading this repository.
+
+crosswalk: null
+crosswalk_reason: >-
+  No tool crosswalk is emitted: aetherAI publishes no OpenAPI and no GraphQL endpoint, so there
+  is no backing operation set to bind these tools to.

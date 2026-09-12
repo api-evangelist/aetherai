@@ -1,0 +1,73 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  https://www.aetherai.com/_api/mcp (live probe), https://www.aetherai.com/llms.txt
+summary: >-
+  There is exactly one publicly callable aetherAI surface and it is ANONYMOUS. The Wix Site MCP
+  endpoint at https://www.aetherai.com/_api/mcp accepts initialize and tools/list with no
+  credential of any kind; a short-lived anonymous visitor token (minted in-band by the
+  GenerateVisitorToken tool) is required only before the two write-capable tools. aetherAI's
+  clinical products are behind a customer login at https://demo.aetherai.com/dpai/login/ and
+  publish no authentication documentation, no key-issuance flow, and no OAuth metadata.
+
+scope_of_this_profile: >-
+  This describes the website's agent endpoint, NOT aetherSlide / aetherWeb / Hema / Endo / Ortho.
+  Those have no public authentication surface to profile.
+
+schemes:
+  - id: anonymous
+    type: none
+    applies_to:
+      - initialize
+      - tools/list
+      - GetBusinessDetails
+      - SearchInSite
+      - SearchSiteApiDocs
+      - BrowseWixRESTDocsMenu
+      - ReadFullDocsArticle
+      - ReadFullDocsMethodSchema
+    verified: probed
+    evidence: https://www.aetherai.com/_api/mcp
+    note: >-
+      Probed 2026-09-12 with no Authorization header: HTTP 200, 9 tools returned. The published
+      llms.txt states plainly "No authentication required to connect to the MCP endpoint".
+  - id: visitor-token
+    type: bearer-in-parameter
+    applies_to:
+      - CallWixSiteAPI
+      - ExecuteWixAPI
+    parameter: visitorToken
+    issuance: >-
+      In-band. The client calls the GenerateVisitorToken tool, which creates a visitor session and
+      returns an access token. No registration, no API key, no client credentials.
+    verified: probed
+    evidence: https://www.aetherai.com/llms.txt
+    note: >-
+      The token is passed as a tool ARGUMENT, not as an HTTP Authorization header — a Wix design
+      choice, not an aetherAI one. Scope is limited to what an anonymous site visitor may do.
+
+oauth:
+  supported: false
+  discovery_probed:
+    - url: https://www.aetherai.com/.well-known/oauth-authorization-server
+      status: 400
+    - url: https://www.aetherai.com/.well-known/oauth-protected-resource/_api/mcp
+      status: 400
+    - url: https://www.aetherai.com/.well-known/openid-configuration
+      status: 400
+  note: >-
+    No OAuth 2.0 or OpenID Connect metadata is served on any host. No scopes/ artifact is written,
+    because there is no scope surface to derive one from.
+
+api_keys:
+  supported: false
+  note: aetherAI issues no public API keys and documents no key lifecycle.
+
+gated_surfaces:
+  - name: aetherAI DPAI (demo / customer application)
+    url: https://demo.aetherai.com/dpai/login/
+    status: 200
+    note: >-
+      A login-gated single-page application. Every path under it, including /api/ and every spec
+      path probed, returns either the SPA shell or a 404 to an unauthenticated client. No
+      credentials were used and none were sought.
