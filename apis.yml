@@ -29,7 +29,7 @@ tags:
   - Medical Imaging
   - Artificial Intelligence
   - Diagnostics
-  - Machine-Learning
+  - Machine Learning
   - Medical Devices
   - Life Sciences
   - MCP
@@ -45,6 +45,7 @@ tags_raw:
   - life-sciences
   - mcp
   - taiwan
+  - Machine-Learning
 apis:
   - name: aetherAI Site MCP
     description: >-
@@ -80,6 +81,9 @@ apis:
         url: conventions/aetherai-conventions.yml
       - type: RateLimits
         url: rate-limits/aetherai-rate-limits.yml
+    x-surface: platform-generated
+    x-platform: wix
+    x-platform-surface: site-mcp
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
