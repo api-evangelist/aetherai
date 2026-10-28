@@ -64,18 +64,108 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-aetherAI (雲象科技, aetherAI Co., Ltd.) is a Taipei-based medical-imaging AI company focused on
-digital pathology. It builds regulated diagnostic software — aetherSlide (FDA-cleared K233126,
-CE-marked, TFDA-approved), aetherWeb, aetherAI Hema, aetherAI Endo and aetherAI Ortho — sold to
-hospitals, reference laboratories and pharmaceutical R&D teams.
+aetherAI (雲象科技, aetherAI Co., Ltd.) is a Taipei-based medical-imaging AI company and one of Asia's leading digital-pathology vendors. It builds regulated diagnostic software for hospitals, reference laboratories and pharmaceutical R&D: aetherSlide, an FDA-cleared (K233126), CE-marked and TFDA-approved whole-slide image management and viewing system; aetherWeb, a cloud digital pathology education platform; aetherAI Hema for bone-marrow smear differential counting; aetherAI Endo for real-time computer-aided polyp detection in colonoscopy; and aetherAI Ortho for whole-spine radiograph measurement. The company was founded in Taiwan, raised NT$765 million in Series B funding led by CDIB Capital, Quanta Computer, Taiwan Business Bank VC and Cathay Venture, listed on Taiwan's Emerging Stock Board in November 2024, holds ISO/IEC 27001 certification, and has filed for the Taiwan Innovation Board. aetherAI publishes no public developer API, no OpenAPI or other machine-readable contract, and no developer portal; its clinical software is sold and deployed through a direct enterprise motion and its application sits behind a customer login. The single publicly callable surface is a Wix-provided Site MCP endpoint on its own domain, which serves website content rather than any clinical product.
 
-**API posture:** aetherAI publishes no public developer API, no OpenAPI or other machine-readable
-contract, and no developer portal. Its clinical application sits behind a customer login at
-`demo.aetherai.com`. The one publicly callable surface is a Wix-provided Site MCP endpoint at
-`https://www.aetherai.com/_api/mcp`, which is anonymous and live but serves website content rather
-than any clinical product. See `x-coverage` in `apis.yml` for the specific wall that was hit.
+**Areas:** Healthcare · Digital Pathology · Medical Imaging · Artificial Intelligence · Diagnostics · Machine Learning · Medical Devices · Life Sciences · MCP · Taiwan
 
-Surfaced via the API Evangelist harvest backlog (source: secondary-market).
-- https://www.aetherai.com/
-- https://github.com/aetherAI
-- https://equityzen.com/company/aetherai
+## aetherAI on APIs.io
+
+Everything profiled for aetherAI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aetherai/](https://apis.io/providers/aetherai/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [aetherAI Site MCP](https://apis.io/apis/aetherai/aetherai-site-mcp/) — A live, anonymous Model Context Protocol endpoint served from aetherAI's own host. It exposes nine tools over JSON-RPC 2.0 (streamable HTTP) for reading…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [aetherAI Site MCP Server](https://apis.io/servers/aetherai/aetherai-site-mcp-server/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Aetherai Authentication](https://apis.io/security/aetherai/aetherai-authentication/)
+- [Aetherai Domain Security](https://apis.io/security/aetherai/aetherai-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Aetherai Plans Pricing](https://apis.io/plans/aetherai/aetherai-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Aetherai Rate Limits](https://apis.io/rate-limits/aetherai/aetherai-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.aetherai.com/)
+- [Support](https://www.aetherai.com/contact)
+- [Blog](https://www.aetherai.com/news)
+- [Privacy policy](https://www.aetherai.com/privacypolicy)
+- [GitHub](https://github.com/aetherAI)
+
+## API Evangelist rating
+
+**Kin Score 19.9** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 25.0 |
+
+**Agent readiness 7.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 19.1** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aetherai/](https://apis.io/providers/aetherai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for aetherAI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aetherai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
